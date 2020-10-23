@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playemo/home/home.dart';
+import 'package:playemo/screens/home/home.dart';
 
 void main() {
   runApp(MyApp());
