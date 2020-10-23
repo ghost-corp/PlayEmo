@@ -5,12 +5,12 @@ import 'package:playemo/global/device_size.dart';
 
 import 'package:playemo/widgets/bottom_bar_icons.dart';
 
-class HomeScreen extends StatefulWidget {
+class LandingScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _LandingScreenState createState() => _LandingScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LandingScreenState extends State<LandingScreen> {
 
   bool playListSelected = false;
   bool wishListSelected = false;
@@ -47,26 +47,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 iconData: Icons.my_library_music,
                 label: 'Playlist',
                 selected: playListSelected,
+                onTap: () {
+                  setState(() {
+                    playListSelected = true;
+                    wishListSelected = false;
+                    homeSelected = false;
+                    searchSelected = false;
+                    accountSelected = false;
+                  });
+                },
               ),
               BottomBarIcon(
                 iconData: Icons.favorite,
                 label: 'Wishlist',
                 selected: wishListSelected,
+                onTap: () {
+                  setState(() {
+                    playListSelected = false;
+                    wishListSelected = true;
+                    homeSelected = false;
+                    searchSelected = false;
+                    accountSelected = false;
+                  });
+                },
               ),
               BottomBarIcon(
                 iconData: Icons.music_note,
                 label: 'Home',
                 selected: homeSelected,
+                onTap: () {
+                  setState(() {
+                    playListSelected = false;
+                    wishListSelected = false;
+                    homeSelected = true;
+                    searchSelected = false;
+                    accountSelected = false;
+                  });
+                },
               ),
               BottomBarIcon(
                 iconData: Icons.search,
                 label: 'Search',
                 selected: searchSelected,
+                onTap: () {
+                  setState(() {
+                    playListSelected = false;
+                    wishListSelected = false;
+                    homeSelected = false;
+                    searchSelected = true;
+                    accountSelected = false;
+                  });
+                },
               ),
               BottomBarIcon(
                 iconData: Icons.supervisor_account_sharp,
                 label: 'Account',
                 selected: accountSelected,
+                onTap: () {
+                  setState(() {
+                    playListSelected = false;
+                    wishListSelected = false;
+                    homeSelected = false;
+                    searchSelected = false;
+                    accountSelected = true;
+                  });
+                },
               )
             ],
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playemo/screens/home/home.dart';
+import 'package:playemo/screens/landing.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LandingScreen(),
     );
   }
 }
