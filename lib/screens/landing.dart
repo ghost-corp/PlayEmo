@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
+import 'package:playemo/screens/home.dart';
 
 import 'package:playemo/widgets/bottom_bar_icons.dart';
 
@@ -17,6 +18,9 @@ class _LandingScreenState extends State<LandingScreen> {
   bool homeSelected = true;
   bool searchSelected = false;
   bool accountSelected = false;
+
+  var index = 2;
+  var screens = [HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +58,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     homeSelected = false;
                     searchSelected = false;
                     accountSelected = false;
+                    index = 0;
                   });
                 },
               ),
@@ -68,6 +73,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     homeSelected = false;
                     searchSelected = false;
                     accountSelected = false;
+                    index = 1;
                   });
                 },
               ),
@@ -82,6 +88,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     homeSelected = true;
                     searchSelected = false;
                     accountSelected = false;
+                    index = 2;
                   });
                 },
               ),
@@ -96,6 +103,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     homeSelected = false;
                     searchSelected = true;
                     accountSelected = false;
+                    index = 3;
                   });
                 },
               ),
@@ -110,6 +118,7 @@ class _LandingScreenState extends State<LandingScreen> {
                     homeSelected = false;
                     searchSelected = false;
                     accountSelected = true;
+                    index = 4;
                   });
                 },
               )
@@ -117,6 +126,7 @@ class _LandingScreenState extends State<LandingScreen> {
           ),
         ),
       ),
+      body: screens[index],
     );
   }
 }
