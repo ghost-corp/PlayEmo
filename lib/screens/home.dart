@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
+import 'package:playemo/widgets/category_card.dart';
 import 'package:playemo/widgets/song_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,52 +29,81 @@ class _HomeScreenState extends State<HomeScreen> {
                 top: 60,
                 left: width(context) * 0.05, right: width(context) * 0.05
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Main',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Container(
-                    width: width(context) * 0.9,
-                    height: 45,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none
-                          ),
-                          filled: true,
-                          fillColor: Color(0xFF2F2C30),
-                          prefixIcon: Icon(
-                            Icons.search, color: Colors.white10,
-                          ),
-                        hintText: 'Search',
-                        contentPadding: EdgeInsets.all(8),
-                        hintStyle: TextStyle(color: Colors.white60),
+              child: Container(
+                height: height(context) * 0.12,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Main',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18
                       ),
-                      style: TextStyle(color: Colors.white60),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 20,),
+                    Container(
+                      width: width(context) * 0.9,
+                      height: 45,
+                      child: TextField(
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none
+                            ),
+                            filled: true,
+                            fillColor: Color(0xFF2F2C30),
+                            prefixIcon: Icon(
+                              Icons.search, color: Colors.white10,
+                            ),
+                          hintText: 'Search',
+                          contentPadding: EdgeInsets.all(8),
+                          hintStyle: TextStyle(color: Colors.white60),
+                        ),
+                        style: TextStyle(color: Colors.white60),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: height(context) * 0.2
+                top: height(context) * 0.18,
               ),
               child: Container(
                 width: width(context),
-                height: height(context) * 0.8,
+                height: height(context) * 0.88,
                 child: ListView(
                   children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: width(context) * 0.05,
+                        right: width(context) * 0.05,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Most popular',
+                            style: TextStyle(
+                              color: Colors.white, fontSize: 16
+                            ),
+                          ),
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color: Colors.white60, fontSize: 14
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10,),
                     Container(
                       height: 200,
                       width: width(context),
@@ -94,6 +124,61 @@ class _HomeScreenState extends State<HomeScreen> {
                             imgPath: 'assets/art3.jpg',
                             album: 'Night Watch',
                             artist: 'Jon Snow',
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: width(context) * 0.05,
+                        right: width(context) * 0.05,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Category',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 16
+                            ),
+                          ),
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color: Colors.white60, fontSize: 14
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 150,
+                      width: width(context),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          CategoryCard(
+                            imgPath: 'assets/pop.png',
+                            categoryName: 'Pop',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/jazz.png',
+                            categoryName: 'Jazz',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/rock.png',
+                            categoryName: 'Rock',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/classic.png',
+                            categoryName: 'Classic',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/blues.png',
+                            categoryName: 'Blues',
                           )
                         ],
                       ),
