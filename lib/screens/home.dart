@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
+import 'package:playemo/widgets/category_card.dart';
 import 'package:playemo/widgets/song_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -123,6 +124,61 @@ class _HomeScreenState extends State<HomeScreen> {
                             imgPath: 'assets/art3.jpg',
                             album: 'Night Watch',
                             artist: 'Jon Snow',
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: width(context) * 0.05,
+                        right: width(context) * 0.05,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Category',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 16
+                            ),
+                          ),
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color: Colors.white60, fontSize: 14
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 150,
+                      width: width(context),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          CategoryCard(
+                            imgPath: 'assets/pop.png',
+                            categoryName: 'Pop',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/jazz.png',
+                            categoryName: 'Jazz',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/rock.png',
+                            categoryName: 'Rock',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/classic.png',
+                            categoryName: 'Classic',
+                          ),
+                          CategoryCard(
+                            imgPath: 'assets/blues.png',
+                            categoryName: 'Blues',
                           )
                         ],
                       ),
