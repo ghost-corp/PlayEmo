@@ -3,6 +3,7 @@ import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
 import 'package:playemo/widgets/artist_card.dart';
 import 'package:playemo/widgets/category_card.dart';
+import 'package:playemo/widgets/news_card.dart';
 import 'package:playemo/widgets/song_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 18
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 15,),
                     Container(
                       width: width(context) * 0.9,
                       height: 45,
@@ -72,11 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: height(context) * 0.15,
+                top: height(context) * 0.18,
               ),
               child: Container(
                 width: width(context),
-                height: height(context) * 0.85,
+                height: height(context) * 0.82,
                 child: ListView(
                   children: [
                     Padding(
@@ -231,6 +232,46 @@ class _HomeScreenState extends State<HomeScreen> {
                           ArtistCard(
                             imgPath: 'assets/artist5.jpg',
                           ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: width(context) * 0.05,
+                        right: width(context) * 0.05,
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'News',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 16
+                            ),
+                          ),
+                          Text(
+                            'More',
+                            style: TextStyle(
+                                color: Colors.white60, fontSize: 14
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 220, width: width(context),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          NewsCard(
+                            imgPath: 'assets/news1.jpg',
+                          ),
+                          NewsCard(
+                            imgPath: 'assets/news2.jpg',
+                          )
                         ],
                       ),
                     )
