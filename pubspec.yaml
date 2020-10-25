@@ -60,6 +60,11 @@ flutter:
     - assets/rap.png
     - assets/rock.png
     - assets/alternative.png
+    - assets/artist1.jpg
+    - assets/artist2.jpg
+    - assets/artist3.jpg
+    - assets/artist4.jpg
+    - assets/artist5.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
