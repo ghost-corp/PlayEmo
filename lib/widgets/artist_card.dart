@@ -14,7 +14,9 @@ class _ArtistCardState extends State<ArtistCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(),
+      padding: EdgeInsets.only(
+        top: 10, bottom: 10, left: 8, right: 8
+      ),
       child: Container(
         height: 70, width: 70,
         decoration: BoxDecoration(
