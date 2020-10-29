@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playemo/screens/landing.dart';
+import 'package:playemo/screens/song_screen.dart';
 import 'package:playemo/widgets/most_popular_screen.dart';
 
 void main() {
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        'most_popular': (context) => MostPopularScreen()
+        'most_popular': (context) => MostPopularScreen(),
+        'song_screen': (context) => SongScreen()
       },
       home: LandingScreen(),
     );
