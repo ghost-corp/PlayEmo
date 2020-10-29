@@ -96,10 +96,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.white, fontSize: 16
                             ),
                           ),
-                          Text(
-                            'More',
-                            style: TextStyle(
-                                color: Colors.white60, fontSize: 14
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                Navigator.of(context).pushNamed("most_popular");
+                              });
+                            },
+                            child: Text(
+                              'More',
+                              style: TextStyle(
+                                  color: Colors.white60, fontSize: 14
+                              ),
                             ),
                           ),
                         ],

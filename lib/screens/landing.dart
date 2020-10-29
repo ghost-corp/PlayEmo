@@ -78,7 +78,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 },
               ),
               BottomBarIcon(
-                iconData: Icons.music_note,
+                iconData: CupertinoIcons.double_music_note,
                 label: 'Home',
                 selected: homeSelected,
                 onTap: () {
