@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playemo/screens/landing.dart';
 import 'package:playemo/screens/song_screen.dart';
-import 'package:playemo/widgets/most_popular_screen.dart';
+import 'package:playemo/screens/most_popular_screen.dart';
 
 void main() {
   runApp(MyApp());

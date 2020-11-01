@@ -31,26 +31,118 @@ class _SongScreenState extends State<SongScreen> {
             width: width(context),
             child: ListView(
               children: [
-                Container(
-                  height: height(context) * 0.5,
-                  width: width(context),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(18)
-                    )
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(48)
+                Stack(
+                  children: [
+                    Container(
+                      height: height(context) * 0.5,
+                      width: width(context),
                     ),
-                    child: Hero(
-                      tag: imgPath,
-                        child: Image.asset(
-                            imgPath,
-                          fit: BoxFit.fill,
+                    Container(
+                      height: height(context) * 0.5,
+                      width: width(context),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(18)
                         )
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(48)
+                        ),
+                        child: Hero(
+                          tag: imgPath,
+                            child: Image.asset(
+                                imgPath,
+                              fit: BoxFit.fill,
+                            )
+                        ),
+                      ),
                     ),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: height(context) * 0.35
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              artist,
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.white38,
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text(
+                              album,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: height(context) * 0.05,
+                    left: width(context) * 0.125,
+                    right: width(context) * 0.05,
+                    bottom: 30
                   ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            album,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700
+                            ),
+                          ),
+                          Text(
+                            '10 songs',
+                            style: TextStyle(
+                              color: Colors.white60
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 30),
+                      Container(
+                        /**This is where description of the song or album would go*/
+                        child: Text(
+                          'This album is the third studio album by Nigerian siner Derhnyel'
+                              ' which was released August 2020',
+                          style: TextStyle(
+                            color: Colors.white60,
+                            fontSize: 16,
+                            wordSpacing: 2,
+                            letterSpacing: 0.5
+                          ),
+                        ),
+                        width: width(context) * 0.65,
+                      )
+                    ],
+                  ),
+                ),
+                Divider(
+                  color: Colors.white12,
                 )
               ],
             ),
@@ -74,7 +166,7 @@ class _SongScreenState extends State<SongScreen> {
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: 30,
+              left: width(context) * 0.15,
               top: height(context) * 0.5
             ),
             child: Container(
