@@ -3,6 +3,8 @@ import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
 import 'dart:ui' as ui;
 
+import 'package:playemo/widgets/song_tile.dart';
+
 class SongScreen extends StatefulWidget {
   @override
   _SongScreenState createState() => _SongScreenState();
@@ -127,23 +129,30 @@ class _SongScreenState extends State<SongScreen> {
                       Container(
                         /**This is where description of the song or album would go*/
                         child: Text(
-                          'This album is the third studio album by Nigerian siner Derhnyel'
-                              ' which was released August 2020',
+                          'This album is the third studio album by Nigerian singer Derhnyel'
+                              ' which was released on August 10, 2020',
                           style: TextStyle(
                             color: Colors.white60,
                             fontSize: 16,
-                            wordSpacing: 2,
+                            wordSpacing: 1.5,
                             letterSpacing: 0.5
                           ),
                         ),
-                        width: width(context) * 0.65,
+                        width: width(context) * 0.7,
                       )
                     ],
                   ),
                 ),
-                Divider(
-                  color: Colors.white12,
+                SongTile(
+                  artist: artist,
+                  song: 'Neone paradise',
+                  duration: '3:00',
+                ),SongTile(
+                  artist: artist,
+                  song: 'Sweet dreams',
+                  duration: '2:57',
                 )
+
               ],
             ),
           ),
