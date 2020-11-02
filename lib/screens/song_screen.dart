@@ -151,7 +151,7 @@ class _SongScreenState extends State<SongScreen> {
                         ),
                         SongTile(
                           artist: artist,
-                          song: 'Neone paradise',
+                          song: 'Neon paradise',
                           duration: '3:00',
                         ),
                         SongTile(
@@ -218,7 +218,7 @@ class _SongScreenState extends State<SongScreen> {
             child: PlayingWidget(
               imgPath: imgPath,
               artist: artist,
-              song: 'Neone paradise',
+              song: 'Neon paradise',
             ),
           )
         ],

@@ -129,17 +129,17 @@ class _MostPopularScreenState extends State<MostPopularScreen> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         SongCard(
-                          imgPath: 'assets/art1.jpg',
+                          imgPath: 'assets/artist1.jpg',
                           album: 'Free Me',
                           artist: 'Khal Drogo',
                         ),
                         SongCard(
-                          imgPath: 'assets/art2.jpg',
+                          imgPath: 'assets/artist2.jpg',
                           album: 'Drogon!!!',
                           artist: 'Khaleesi',
                         ),
                         SongCard(
-                          imgPath: 'assets/art3.jpg',
+                          imgPath: 'assets/artist3.jpg',
                           album: 'Night Watch',
                           artist: 'Jon Snow',
                         )
@@ -188,17 +188,17 @@ class _MostPopularScreenState extends State<MostPopularScreen> {
                       scrollDirection: Axis.horizontal,
                       children: [
                         SongCard(
-                          imgPath: 'assets/art1.jpg',
+                          imgPath: 'assets/artist5.jpg',
                           album: 'Free Me',
                           artist: 'Khal Drogo',
                         ),
                         SongCard(
-                          imgPath: 'assets/art2.jpg',
+                          imgPath: 'assets/news1.jpg',
                           album: 'Drogon!!!',
                           artist: 'Khaleesi',
                         ),
                         SongCard(
-                          imgPath: 'assets/art3.jpg',
+                          imgPath: 'assets/news2.jpg',
                           album: 'Night Watch',
                           artist: 'Jon Snow',
                         )
