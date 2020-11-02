@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
@@ -177,6 +178,42 @@ class _PlayingScreenState extends State<PlayingScreen> {
                     ],
                   )
                 ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 35, left: 10
+              ),
+              child: IconButton(
+                icon: Icon(
+                    Icons.keyboard_arrow_down
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.white,
+                iconSize: 32,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 35, right: 10
+              ),
+              child: IconButton(
+                icon: Icon(
+                    Icons.more_vert
+                ),
+                onPressed: () {
+                  //TODO
+                },
+                color: Colors.white70,
+                iconSize: 32,
               ),
             ),
           )
