@@ -8,6 +8,9 @@ class PlayingScreen extends StatefulWidget {
 class _PlayingScreenState extends State<PlayingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Hero(
+      tag: 'play-emo',
+      child: Scaffold(),
+    );
   }
 }
