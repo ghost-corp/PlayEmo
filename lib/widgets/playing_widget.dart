@@ -44,8 +44,11 @@ class _PlayingWidgetState extends State<PlayingWidget> {
                     width: 55, height: 55,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        widget.imgPath
+                      child: Hero(
+                        tag: 'playing_image',
+                        child: Image.asset(
+                          widget.imgPath
+                        ),
                       ),
                     ),
                   ),
@@ -54,20 +57,26 @@ class _PlayingWidgetState extends State<PlayingWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        widget.song,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500
+                      Hero(
+                        tag: 'playing_song',
+                        child: Text(
+                          widget.song,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500
+                          ),
                         ),
                       ),
                       SizedBox(height: 5,),
-                      Text(
-                        widget.artist,
-                        style: TextStyle(
-                            color: Colors.white38,
-                            fontSize: 14,
+                      Hero(
+                        tag: 'playing_artist',
+                        child: Text(
+                          widget.artist,
+                          style: TextStyle(
+                              color: Colors.white38,
+                              fontSize: 14,
+                          ),
                         ),
                       ),
                     ],
@@ -110,22 +119,28 @@ class _PlayingWidgetState extends State<PlayingWidget> {
       ),
     );
   }
+
+  Route createRoute() {
+    return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => PlayingScreen(
+          imgPath: widget.imgPath,
+          artist: widget.artist,
+          song: widget.song,
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = Offset(0.0, 1.0);
+          var end = Offset.zero;
+          var curve = Curves.ease;
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+        transitionDuration: Duration(milliseconds: 400),
+      reverseTransitionDuration: Duration(milliseconds: 400)
+    );
+  }
 }
 
-Route createRoute() {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => PlayingScreen(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(0.0, 1.0);
-      var end = Offset.zero;
-      var curve = Curves.ease;
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      var offsetAnimation = animation.drive(tween);
-      return SlideTransition(
-        position: offsetAnimation,
-        child: child,
-      );
-    },
-    transitionDuration: Duration(milliseconds: 500)
-  );
-}
