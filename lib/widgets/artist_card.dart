@@ -22,11 +22,11 @@ class _ArtistCardState extends State<ArtistCard> {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: 10, bottom: 10, left: 8, right: 8
+        left: 8, right: 8
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             height: 50, width: 50,
@@ -36,7 +36,10 @@ class _ArtistCardState extends State<ArtistCard> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(60),
               child: (widget.file == null && !hasImage)
-                  ? Image.asset('assets/no_cover.png', fit: BoxFit.fill,) : (hasImage)
+                  ? Image.asset(
+                'assets/person.png',
+                fit: BoxFit.fill,
+              ) : (hasImage)
                   ? Image.memory(
                 widget.imgPath,
                 fit: BoxFit.fill,
@@ -47,10 +50,13 @@ class _ArtistCardState extends State<ArtistCard> {
             ),
           ),
           SizedBox(height: 5,),
-          Text(
-            widget.artistName,
-            style: TextStyle(
-              color: Colors.white60,
+          Container(
+            width: 100,
+            child: Text(
+              widget.artistName,
+              style: TextStyle(
+                color: Colors.white60,
+              ),
             ),
           )
         ],

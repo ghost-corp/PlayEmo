@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
@@ -225,13 +225,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Container(
-                        height: 90,
+                        height: 120,
                         width: width(context),
                         child: FutureBuilder(
                           future: audioQuery.getArtists(),
                           builder: (context, snapshot) {
                             artists = snapshot.data;
                             List<Widget> artistWidget = [];
+                            List<Widget> randomArtist = [];
                             if (snapshot.data == null) {
                               return Center(
                                 child: Text('No artist found'),
@@ -247,9 +248,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               print(element.name);
                               print(element.artistArtPath);
                             });
+
+                            for(int i =0; i <= 3; i++) {
+                              var randArt = getRandomElement(artistWidget);
+                              randomArtist.add(randArt);
+                            }
                             return ListView(
                               scrollDirection: Axis.horizontal,
-                              children: [...artistWidget],
+                              children: [...randomArtist],
                             );
                           },
                         ),
@@ -302,5 +308,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           )),
     );
+  }
+
+  T getRandomElement<T>(List<T> list) {
+    final random = new Random();
+    var i = random.nextInt(list.length);
+    return list[i];
   }
 }
