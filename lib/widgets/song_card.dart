@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class SongCard extends StatefulWidget {
@@ -40,13 +42,17 @@ class _SongCardState extends State<SongCard> {
           child: Stack(
             children: [
               Container(
-                height: 200, width: 150,
+                height: 220, width: 150,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(18),
                   child: Hero(
-                    tag: widget.imgPath,
-                    child: Image.asset(
-                      widget.imgPath,
+                    tag: widget.album,
+                    child: widget.imgPath == null ?
+                    Image.asset(
+                      'assets/no_cover.png',
+                      fit: BoxFit.fill,
+                    ) : Image.file(
+                      File(widget.imgPath),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -73,15 +79,19 @@ class _SongCardState extends State<SongCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        widget.album,
+                        widget.album.length < 20 ?
+                        widget.album : widget.album.substring(0, 20) + '...',
                         style: TextStyle(
-                          color: Colors.white
+                          color: Colors.white,
+                          fontSize: 14
                         ),
                       ),
                       Text(
-                        widget.artist,
+                        widget.artist.length < 15 ?
+                        widget.artist : widget.artist.substring(0, 15) + '...',
                         style: TextStyle(
-                          color: Colors.white60
+                          color: Colors.white60,
+                          fontSize: 14
                         ),
                       )
                     ],

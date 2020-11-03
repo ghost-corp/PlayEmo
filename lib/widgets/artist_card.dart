@@ -22,7 +22,7 @@ class _ArtistCardState extends State<ArtistCard> {
 
     return Padding(
       padding: EdgeInsets.only(
-        left: 8, right: 8
+        left: 8, right: 8, top: 10
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,8 @@ class _ArtistCardState extends State<ArtistCard> {
           Container(
             width: 100,
             child: Text(
-              widget.artistName,
+              widget.artistName.length < 15 ?
+              widget.artistName : widget.artistName.substring(0, 15) + '...',
               style: TextStyle(
                 color: Colors.white60,
               ),

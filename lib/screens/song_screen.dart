@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
@@ -53,9 +55,13 @@ class _SongScreenState extends State<SongScreen> {
                             bottomRight: Radius.circular(48)
                           ),
                           child: Hero(
-                            tag: imgPath,
-                              child: Image.asset(
-                                  imgPath,
+                            tag: album,
+                              child: imgPath == null ?
+                              Image.asset(
+                                'assets/no_cover.png',
+                                fit: BoxFit.fill,
+                              ) : Image.file(
+                                  File(imgPath),
                                 fit: BoxFit.fill,
                               )
                           ),
@@ -216,7 +222,7 @@ class _SongScreenState extends State<SongScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: PlayingWidget(
-              imgPath: imgPath,
+              imgPath: 'assets/no_cover.png',
               artist: artist,
               song: 'Neon paradise',
             ),

@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
   List<ArtistInfo> artists;
+  List<AlbumInfo> albums;
 
   @override
   Widget build(BuildContext context) {
@@ -120,27 +121,43 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 5,
                       ),
                       Container(
-                        height: 200,
+                        height: 220,
                         width: width(context),
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            SongCard(
-                              imgPath: 'assets/art1.jpg',
-                              album: 'Free Me',
-                              artist: 'Khal Drogo',
-                            ),
-                            SongCard(
-                              imgPath: 'assets/art2.jpg',
-                              album: 'Drogon!!!',
-                              artist: 'Khaleesi',
-                            ),
-                            SongCard(
-                              imgPath: 'assets/art3.jpg',
-                              album: 'Night Watch',
-                              artist: 'Jon Snow',
-                            )
-                          ],
+                        child: FutureBuilder(
+                          future: audioQuery.getAlbums(),
+                          builder: (context, snapshot) {
+                            List<Widget> albumWidget = [];
+                            List<Widget> randomAlbum = [];
+
+                            albums = snapshot.data;
+
+                            if (snapshot.data == null) {
+                              return Center(
+                                child: Text('No artist found'),
+                              );
+                            }
+                            albums.forEach((element) {
+                              albumWidget.add(
+                                  SongCard(
+                                    imgPath: element.albumArt,
+                                    album: element.title,
+                                    artist: element.artist,
+                                  )
+                              );
+                            });
+
+                            for(int i =0; i <= 3; i++) {
+                              var randArt = getRandomElement(albumWidget);
+                              randomAlbum.add(randArt);
+                            }
+
+                            return ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                ...randomAlbum
+                              ],
+                            );
+                          },
                         ),
                       ),
                       SizedBox(
@@ -245,8 +262,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   artistName: element.name,
                                 )
                               );
-                              print(element.name);
-                              print(element.artistArtPath);
                             });
 
                             for(int i =0; i <= 3; i++) {
