@@ -6,22 +6,23 @@ import 'package:playemo/global/device_size.dart';
 import 'package:playemo/widgets/playing_widget.dart';
 
 import 'package:playemo/widgets/song_tile.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
 
 class SongScreen extends StatefulWidget {
+  final AlbumInfo albumInfo;
+
+  const SongScreen({this.albumInfo});
+
   @override
   _SongScreenState createState() => _SongScreenState();
 }
 
 class _SongScreenState extends State<SongScreen> {
+  final FlutterAudioQuery audioQuery = FlutterAudioQuery();
+  List<SongInfo> songInfo;
+
   @override
   Widget build(BuildContext context) {
-
-    final Map arguments = ModalRoute.of(context).settings.arguments as Map;
-    String imgPath = arguments['cover'];
-    String artist = arguments['artist'];
-    String album = arguments['album'];
-    // String description = arguments['description'];
-
     return Scaffold(
       backgroundColor: AppColor.darkThemeBackground,
       body: Stack(
@@ -46,52 +47,48 @@ class _SongScreenState extends State<SongScreen> {
                         height: height(context) * 0.5,
                         width: width(context),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(18)
-                          )
-                        ),
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(18))),
                         child: ClipRRect(
                           borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(48)
-                          ),
+                              bottomRight: Radius.circular(48)),
                           child: Hero(
-                            tag: album,
-                              child: imgPath == null ?
-                              Image.asset(
-                                'assets/no_cover.png',
-                                fit: BoxFit.fill,
-                              ) : Image.file(
-                                  File(imgPath),
-                                fit: BoxFit.fill,
-                              )
-                          ),
+                              tag: widget.albumInfo.title,
+                              child: widget.albumInfo.albumArt == null
+                                  ? Image.asset(
+                                      'assets/no_cover.png',
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.file(
+                                      File(widget.albumInfo.albumArt),
+                                      fit: BoxFit.fill,
+                                    )),
                         ),
                       ),
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.only(
-                            top: height(context) * 0.35
-                          ),
+                          padding: EdgeInsets.only(top: height(context) * 0.35),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                artist,
+                                widget.albumInfo.artist,
                                 style: TextStyle(
                                   fontSize: 30,
                                   color: Colors.white38,
                                 ),
                               ),
-                              SizedBox(height: 5,),
+                              SizedBox(
+                                height: 5,
+                              ),
                               Text(
-                                album,
+                                widget.albumInfo.title,
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700
-                                ),
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
                               )
                             ],
                           ),
@@ -100,82 +97,94 @@ class _SongScreenState extends State<SongScreen> {
                     ],
                   ),
                   Container(
-                    height: height(context) * 0.45,
-                    width: width(context),
-                    child: ListView(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: height(context) * 0.05,
-                              left: width(context) * 0.125,
-                              right: width(context) * 0.05,
-                              bottom: 30
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    album,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w700
-                                    ),
-                                  ),
-                                  Text(
-                                    '10 songs',
-                                    style: TextStyle(
-                                        color: Colors.white60
-                                    ),
-                                  )
-                                ],
+                      height: height(context) * 0.45,
+                      width: width(context),
+                      child: FutureBuilder(
+                        future: audioQuery.getSongsFromAlbum(
+                            albumId: widget.albumInfo.id),
+                        builder: (context, snapshot) {
+                          List<Widget> songsWidget = [];
+
+                          songInfo = snapshot.data;
+
+                          if(snapshot.data == null) {
+                            return Center(
+                              child: Container(
+                                height: 60, width: 60,
+                                child: CircularProgressIndicator(),
                               ),
-                              SizedBox(height: 30),
-                              Container(
-                                /**This is where description of the song or album would go*/
-                                child: Text(
-                                  'This album is the third studio album by Nigerian singer Derhnyel'
-                                      ' which was released on August 10, 2020',
-                                  style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 16,
-                                      wordSpacing: 1.5,
-                                      letterSpacing: 0.5
-                                  ),
+                            );
+                          }
+
+                          songInfo.forEach((element) {
+                            songsWidget.add(
+                              SongTile(
+                                artist: element.artist,
+                                song: element.title,
+                                duration: element.duration,
+                              )
+                            );
+                          });
+
+                          return ListView(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: height(context) * 0.05,
+                                    left: width(context) * 0.125,
+                                    right: width(context) * 0.05,
+                                    bottom: 30),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          widget.albumInfo.title,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        Text(
+                                          widget.albumInfo.numberOfSongs,
+                                          style:
+                                              TextStyle(color: Colors.white60),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(height: 30),
+                                    Container(
+                                      /**This is where description of the song or album would go*/
+                                      child: Text(
+                                        'This album is the third studio album by Nigerian singer Derhnyel'
+                                        ' which was released on August 10, 2020',
+                                        style: TextStyle(
+                                            color: Colors.white60,
+                                            fontSize: 16,
+                                            wordSpacing: 1.5,
+                                            letterSpacing: 0.5),
+                                      ),
+                                      width: width(context) * 0.7,
+                                    )
+                                  ],
                                 ),
-                                width: width(context) * 0.7,
+                              ),
+                              ...songsWidget,
+                              SizedBox(
+                                height: 150,
                               )
                             ],
-                          ),
-                        ),
-                        SongTile(
-                          artist: artist,
-                          song: 'Neon paradise',
-                          duration: '3:00',
-                        ),
-                        SongTile(
-                          artist: artist,
-                          song: 'Sweet dreams',
-                          duration: '2:57',
-                        ),
-                        SongTile(
-                          artist: artist,
-                          song: 'Never die',
-                          duration: '4:47',
-                        ),
-                        SizedBox(
-                          height: 150,
-                        )
-                      ],
-                    ),
-                  )
+                          );
+                        },
+                      ))
                 ],
               ),
             ),
@@ -183,9 +192,7 @@ class _SongScreenState extends State<SongScreen> {
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.only(
-                top: 40
-              ),
+              padding: EdgeInsets.only(top: 40),
               child: IconButton(
                 icon: Icon(
                   Icons.arrow_back_outlined,
@@ -199,17 +206,14 @@ class _SongScreenState extends State<SongScreen> {
           ),
           Padding(
             padding: EdgeInsets.only(
-              left: width(context) * 0.15,
-              top: height(context) * 0.5
-            ),
+                left: width(context) * 0.15, top: height(context) * 0.5),
             child: Container(
-              height: 50, width: 50,
+              height: 50,
+              width: 50,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(45),
-                gradient: LinearGradient(
-                  colors: [AppColor.primary, AppColor.primary1]
-                )
-              ),
+                  borderRadius: BorderRadius.circular(45),
+                  gradient: LinearGradient(
+                      colors: [AppColor.primary, AppColor.primary1])),
               child: Center(
                 child: Icon(
                   Icons.play_arrow_outlined,
@@ -223,7 +227,7 @@ class _SongScreenState extends State<SongScreen> {
             alignment: Alignment.bottomCenter,
             child: PlayingWidget(
               imgPath: 'assets/no_cover.png',
-              artist: artist,
+              artist: widget.albumInfo.artist,
               song: 'Neon paradise',
             ),
           )

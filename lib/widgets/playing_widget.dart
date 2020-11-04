@@ -60,7 +60,8 @@ class _PlayingWidgetState extends State<PlayingWidget> {
                       Hero(
                         tag: 'playing_song',
                         child: Text(
-                          widget.song,
+                            widget.song.length < 25 ?
+                            widget.song : widget.song.substring(0, 25) + '...',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -72,7 +73,8 @@ class _PlayingWidgetState extends State<PlayingWidget> {
                       Hero(
                         tag: 'playing_artist',
                         child: Text(
-                          widget.artist,
+                          widget.artist.length < 30 ?
+                          widget.artist : widget.artist.substring(0, 30) + '...',
                           style: TextStyle(
                               color: Colors.white38,
                               fontSize: 14,

@@ -27,7 +27,7 @@ class _SongTileState extends State<SongTile> {
           height: 60,
           child: Padding(
             padding: EdgeInsets.only(
-              left: width(context) * 0.125,
+              left: width(context) * 0.05,
               right: width(context) * 0.05,
             ),
             child: Row(
@@ -61,16 +61,18 @@ class _SongTileState extends State<SongTile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                            widget.song,
+                          widget.song.length < 25 ?
+                          widget.song : widget.song.substring(0, 25) + '...',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500
                           ),
                         ),
                         SizedBox(height: 5,),
                         Text(
-                            widget.artist,
+                          widget.artist.length < 30 ?
+                          widget.artist : widget.artist.substring(0, 30) + '...',
                           style: TextStyle(
                             color: Colors.white38,
                             fontSize: 14
