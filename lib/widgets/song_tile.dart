@@ -85,7 +85,7 @@ class _SongTileState extends State<SongTile> {
                 Row(
                   children: [
                     Text(
-                      widget.duration,
+                      '${printDuration(widget.duration)}',
                       style: TextStyle(
                         color: Colors.white38,
                         fontSize: 15,
@@ -111,5 +111,18 @@ class _SongTileState extends State<SongTile> {
         ),
       ],
     );
+  }
+
+  String printDuration(String songDuration) {
+    Duration duration;
+    int seconds;
+    seconds = int.tryParse(songDuration);
+    duration = Duration(milliseconds: seconds);
+
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    String twoDigitsMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+
+    return "$twoDigitsMinutes:$twoDigitSeconds";
   }
 }

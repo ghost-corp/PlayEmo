@@ -101,7 +101,9 @@ class _SongScreenState extends State<SongScreen> {
                       width: width(context),
                       child: FutureBuilder(
                         future: audioQuery.getSongsFromAlbum(
-                            albumId: widget.albumInfo.id),
+                            albumId: widget.albumInfo.id,
+                          sortType: SongSortType.SMALLER_TRACK_NUMBER
+                        ),
                         builder: (context, snapshot) {
                           List<Widget> songsWidget = [];
 
@@ -154,7 +156,9 @@ class _SongScreenState extends State<SongScreen> {
                                               fontWeight: FontWeight.w700),
                                         ),
                                         Text(
-                                          widget.albumInfo.numberOfSongs,
+                                          int.tryParse(widget.albumInfo.numberOfSongs) > 1 ?
+                                          "${widget.albumInfo.numberOfSongs} songs" :
+                                          "${widget.albumInfo.numberOfSongs} song",
                                           style:
                                               TextStyle(color: Colors.white60),
                                         )
