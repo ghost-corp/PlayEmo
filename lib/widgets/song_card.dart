@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
+import 'package:playemo/screens/song_screen.dart';
 
 class SongCard extends StatefulWidget {
 
-  final String imgPath;
-  final String artist;
-  final String album;
+  final AlbumInfo albumInfo;
   final String description;
 
-  const SongCard({this.album, this.artist, this.imgPath, this.description});
+  const SongCard({this.albumInfo, this.description});
 
   @override
   _SongCardState createState() => _SongCardState();
@@ -23,14 +23,10 @@ class _SongCardState extends State<SongCard> {
       child: InkWell(
         borderRadius: BorderRadius.circular(18),
         onTap: () {
-          Navigator.of(context).pushNamed(
-            "song_screen",
-            arguments: {
-              'cover': widget.imgPath,
-              'album': widget.album,
-              'artist': widget.artist,
-              'description': widget.description
-            }
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => SongScreen(albumInfo: widget.albumInfo)
+            )
           );
         },
         child: Container(
@@ -46,13 +42,13 @@ class _SongCardState extends State<SongCard> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(18),
                   child: Hero(
-                    tag: widget.album,
-                    child: widget.imgPath == null ?
+                    tag: widget.albumInfo.title,
+                    child: widget.albumInfo.albumArt == null ?
                     Image.asset(
                       'assets/no_cover.png',
                       fit: BoxFit.fill,
                     ) : Image.file(
-                      File(widget.imgPath),
+                      File(widget.albumInfo.albumArt),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -79,16 +75,16 @@ class _SongCardState extends State<SongCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        widget.album.length < 20 ?
-                        widget.album : widget.album.substring(0, 20) + '...',
+                        widget.albumInfo.title.length < 15 ?
+                        widget.albumInfo.title : widget.albumInfo.title.substring(0, 15) + '...',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14
                         ),
                       ),
                       Text(
-                        widget.artist.length < 15 ?
-                        widget.artist : widget.artist.substring(0, 15) + '...',
+                        widget.albumInfo.artist.length < 15 ?
+                        widget.albumInfo.artist : widget.albumInfo.artist.substring(0, 15) + '...',
                         style: TextStyle(
                           color: Colors.white60,
                           fontSize: 14

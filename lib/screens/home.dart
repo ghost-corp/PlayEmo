@@ -139,9 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             albums.forEach((element) {
                               albumWidget.add(
                                   SongCard(
-                                    imgPath: element.albumArt,
-                                    album: element.title,
-                                    artist: element.artist,
+                                    albumInfo: element,
                                   )
                               );
                             });
