@@ -3,11 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
+import 'package:playemo/models/music_model.dart';
 import 'package:playemo/widgets/artist_card.dart';
 import 'package:playemo/widgets/category_card.dart';
 import 'package:playemo/widgets/news_card.dart';
 import 'package:playemo/widgets/song_card.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -91,30 +93,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           left: width(context) * 0.05,
                           right: width(context) * 0.05,
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Most popular',
-                              style:
+                        child: Consumer<MusicModel>(
+                          builder: (context, musicModel, child) {
+                            return Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Most popular',
+                                  style:
                                   TextStyle(color: Colors.white, fontSize: 16),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  Navigator.of(context)
-                                      .pushNamed("most_popular");
-                                });
-                              },
-                              child: Text(
-                                'More',
-                                style: TextStyle(
-                                    color: Colors.white60, fontSize: 14),
-                              ),
-                            ),
-                          ],
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    musicModel.changeIndex(5);
+                                  },
+                                  child: Text(
+                                    'More',
+                                    style: TextStyle(
+                                        color: Colors.white60, fontSize: 14),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                       SizedBox(

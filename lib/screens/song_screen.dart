@@ -67,7 +67,11 @@ class _SongScreenState extends State<SongScreen> {
                       ),
                       Center(
                         child: Padding(
-                          padding: EdgeInsets.only(top: height(context) * 0.35),
+                          padding: EdgeInsets.only(
+                              top: height(context) * 0.35,
+                            left: width(context) * 0.1,
+                            right: width(context) * 0.1
+                          ),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,13 +152,16 @@ class _SongScreenState extends State<SongScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          widget.albumInfo.title,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.w700),
+                                        Flexible(
+                                          child: Text(
+                                            widget.albumInfo.title,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700),
+                                          ),
                                         ),
+                                        SizedBox(width: 30,),
                                         Text(
                                           int.tryParse(widget.albumInfo.numberOfSongs) > 1 ?
                                           "${widget.albumInfo.numberOfSongs} songs" :
@@ -164,20 +171,7 @@ class _SongScreenState extends State<SongScreen> {
                                         )
                                       ],
                                     ),
-                                    SizedBox(height: 30),
-                                    Container(
-                                      /**This is where description of the song or album would go*/
-                                      child: Text(
-                                        'This album is the third studio album by Nigerian singer Derhnyel'
-                                        ' which was released on August 10, 2020',
-                                        style: TextStyle(
-                                            color: Colors.white60,
-                                            fontSize: 16,
-                                            wordSpacing: 1.5,
-                                            letterSpacing: 0.5),
-                                      ),
-                                      width: width(context) * 0.7,
-                                    )
+                                    SizedBox(height: 20),
                                   ],
                                 ),
                               ),
