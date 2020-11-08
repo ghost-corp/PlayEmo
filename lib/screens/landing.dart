@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:playemo/global/app_color.dart';
 import 'package:playemo/global/device_size.dart';
 import 'package:playemo/models/music_model.dart';
+import 'package:playemo/screens/albums_screen.dart';
 import 'package:playemo/screens/home.dart';
 import 'package:playemo/screens/most_popular_screen.dart';
 
@@ -22,7 +23,7 @@ class _LandingScreenState extends State<LandingScreen> {
   bool searchSelected = false;
   bool accountSelected = false;
 
-  var screens = [HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen(), MostPopularScreen()];
+  var screens = [HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen(), MostPopularScreen(), AlbumsScreen()];
 
   @override
   Widget build(BuildContext context) {

@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Albums',
+                                  'Most popular',
                                   style:
                                   TextStyle(color: Colors.white, fontSize: 16),
                                 ),

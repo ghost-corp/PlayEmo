@@ -1,12 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:playemo/screens/song_screen.dart';
 
 class SongCard extends StatefulWidget {
 
-  final AlbumInfo albumInfo;
+  final albumInfo;
   final String description;
 
   const SongCard({this.albumInfo, this.description});
@@ -43,12 +40,9 @@ class _SongCardState extends State<SongCard> {
                   borderRadius: BorderRadius.circular(18),
                   child: Hero(
                     tag: widget.albumInfo.title,
-                    child: widget.albumInfo.albumArt == null ?
+                    child:
                     Image.asset(
                       'assets/no_cover.png',
-                      fit: BoxFit.fill,
-                    ) : Image.file(
-                      File(widget.albumInfo.albumArt),
                       fit: BoxFit.fill,
                     ),
                   ),
